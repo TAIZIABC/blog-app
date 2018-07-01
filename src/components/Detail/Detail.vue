@@ -47,34 +47,41 @@
       <!--弹窗-->
       <div class="comment-box" v-show="commentBox" @click="commentFuns">
         <div class="box" @click.stop="stopFun">
-          <textarea type="text" class="comment-txt" id=""></textarea>
-          <button class="publish">发表评论</button>
+          <textarea type="text" class="comment-txt" v-model="ratingVal"></textarea>
+          <button class="publish" @click="publish">发表评论</button>
         </div>
       </div>
       <!--评论区-->
       <div class="comment">
         <div class="comment-head">
-          <span>评论(5)</span>
+          <span>评论({{ ratings.length}})</span>
         </div>
         <template>
-          <li class="comment-item">
+          <li class="comment-item" v-for="(rating,index) in ratings">
             <div class="comment-item-head">
-              <img src="https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=941310360,2054712345&fm=27&gp=0.jpg" alt="" class="user-avatar">
+              <img :src="rating.userAvatar" alt="" class="user-avatar">
               <div class="user-name">
-                <span>taizi</span>
-                <span class="time">06.29 09:22</span>
+                <span>{{ rating.userName }}</span>&nbsp;
+                <span class="time">{{ rating.time}}</span>
               </div>
               <div class="item-right">
-                <svg class="icon" aria-hidden="true">
+                <svg class="icon" aria-hidden="true" @click="ratingZan(index)">
                   <use xlink:href="#icon-icon_good"></use>
-                </svg>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <svg class="icon" aria-hidden="true">
+                </svg>{{ rating.zan}}
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <svg class="icon" aria-hidden="true" @click="ratingCai(index)">
                   <use xlink:href="#icon-cai"></use>
-                </svg>
+                </svg>{{ rating.cai}}
               </div>
+            </div>
+            <div class="comment-item-body">
+              <p>{{ rating.content}}</p>
             </div>
           </li>
         </template>
+        <div class="comment-footer">
+          --end--
+        </div>
       </div>
     </div>
 </template>
@@ -94,6 +101,8 @@
         collection: false,
         zan: false,
         cai: false,
+        // 评论内容
+        ratingVal: '',
         article: {
           title: '终于等到你：简书代码块高亮',
           authorName: 'taizi',
@@ -105,7 +114,32 @@
           collection: 2,
           zan: 14,
           cai: 6
-        }
+        },
+        ratings:[{
+          id: 1,
+          userName: 'taizi',
+          userAvatar: 'https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=941310360,2054712345&fm=27&gp=0.jpg',
+          time: '06.29 09:22',
+          content: '作者是有怎样的才华，才能把小事表现的淋漓尽致的。',
+          zan: 4,
+          cai: 5
+        },{
+          id: 1,
+          userName: 'taizi',
+          userAvatar: 'https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=941310360,2054712345&fm=27&gp=0.jpg',
+          time: '06.29 09:22',
+          content: '作者是有怎样的才华，才能把小事表现的淋漓尽致的。',
+          zan: 4,
+          cai: 5
+        },{
+          id: 1,
+          userName: 'taizi',
+          userAvatar: 'https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=941310360,2054712345&fm=27&gp=0.jpg',
+          time: '06.29 09:22',
+          content: '作者是有怎样的才华，才能把小事表现的淋漓尽致的。',
+          zan: 4,
+          cai: 5
+        }]
       }
     },
     methods: {
@@ -123,17 +157,38 @@
       stopFun(){
         return false;
       },
+      // 收藏方法
       coll(){
         this.collection = !this.collection;
         this.collection?this.article.collection++:this.article.collection--;
       },
+      // 赞方法
       zanFun(){
         this.zan = !this.zan;
         this.zan?this.article.zan++:this.article.zan--;
       },
+      // 踩方法
       caiFun(){
         this.cai = !this.cai;
         this.cai?this.article.cai++:this.article.cai--;
+      },
+      // 评论点赞方法
+      ratingZan(index){
+        this.ratings[index].zan++;
+      },
+      // 评论踩方法
+      ratingCai(index){
+        this.ratings[index].cai++;
+      },
+      publish(){
+        if(this.ratingVal){
+          let temp = {id: 6,userName:'abc',userAvatar:'https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=941310360,2054712345&fm=27&gp=0.jpg',time:'07.01 13:33',content:this.ratingVal,zan:0,cai:0};
+          this.ratings.unshift(temp);
+          this.ratingVal = '';
+          this.commentFuns();
+        }else{
+          alert('请输入内容！');
+        }
       }
     },
     components:{
@@ -206,20 +261,19 @@
     }
 
     .comment-box{
-      position: fixed
+      position: absolute
       top: 0
       left: 0
       width: 100%
-      height: 100%
+      height: 1500px
       background: rgba(0,0,0,0.5)
       .box{
-          position: absolute
+          position: fixed
           bottom: 0
           left: 0
           width: 100%
           height: 150px
-          opacity: 1
-          background-color: white
+          background: rgba(255,255,255,1)
           z-index: 1000
           .comment-txt{
             display block
@@ -244,7 +298,7 @@
     .comment{
       margin-top: 50px
       border-top: 10px solid #f2f2f2
-      margin-bottom: 200px
+      margin-bottom: 50px
       .comment-head{
         line-height: 40px
         text-indent: 4px
@@ -277,6 +331,11 @@
             }
           }
         }
+      }
+      .comment-footer{
+        width: 100%
+        line-height: 100px
+        text-align: center
       }
     }
   }

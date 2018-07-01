@@ -33,19 +33,19 @@
               title: '江西理工大学',
               content: '信息工程学院网络151',
               imgSrc: 'https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=2139391670,4174270048&fm=27&gp=0.jpg',
-              url: 'http://www.baidu.com'
+              url: '/detail'
             },
             {
               title: '江西理工大学',
               content: '信息工程学院网络151',
               imgSrc: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1530579513&di=51e830bdc45a47441bf54ed3f688654d&imgtype=jpg&er=1&src=http%3A%2F%2Fpic32.photophoto.cn%2F20140817%2F0034034463193076_b.jpg',
-              url: 'http://www.baidu.com'
+              url: '/detail'
             },
             {
               title: '江西理工大学',
               content: '信息工程学院网络151',
               imgSrc: 'https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=276813578,2219466530&fm=200&gp=0.jpg',
-              url: 'http://www.baidu.com'
+              url: '/detail'
             }
           ]
         }
