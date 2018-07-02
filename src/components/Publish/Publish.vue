@@ -1,6 +1,6 @@
 <template>
   <div class="publish">
-    <NavTab></NavTab>
+    <NavTab :active="1"></NavTab>
     <div class="header">发布页面</div>
     <div class="content">
       <div class="input-group">

@@ -7,14 +7,14 @@
         <h2>{{ article.title }}</h2>
       </div>
       <div class="author">
-        <img class="avator" :src="article.authorSrc" alt="">
+        <img class="avator" :src="article.authorAvatar" alt="">
         <span class="author_name">{{ article.authorName }}</span>
         <el-button type="success" size="small" class="follow" @click="follow = !follow">{{ follow?'关注':'已关注'}}</el-button>
       </div>
       <div class="time">发布于：{{ article.time }}</div>
       <!--内容区域-->
       <div class="content">
-        <img class="content-img" :src="article.imgSrc" alt="">
+        <img class="content-img" :src="article.imgSrc" v-show="article.imgSrc">
         <p>{{ article.content }}</p>
       </div>
       <!--底部区域-->
@@ -106,7 +106,7 @@
         article: {
           title: '终于等到你：简书代码块高亮',
           authorName: 'taizi',
-          authorSrc: 'https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=941310360,2054712345&fm=27&gp=0.jpg',
+          authorAvatar: 'https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=941310360,2054712345&fm=27&gp=0.jpg',
           time: '2018-05-28 16:50',
           imgSrc: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1530377300123&di=ddfe6fb3231ebd1771e87c5c93a7179b&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2Fb7003af33a87e95053e42ae21c385343faf2b449.jpg',
           content: '就在上周，我们的产品小哥哥告诉大婶，咋们偷偷上线了一个新功能:那就是技术类作者期待了很久的代码块高亮。',
@@ -292,8 +292,6 @@
             color: green
           }
         }
-
-
     }
     .comment{
       margin-top: 50px

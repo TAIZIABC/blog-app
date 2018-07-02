@@ -1,6 +1,6 @@
 <template>
     <div class="search">
-      <NavTab></NavTab>
+      <NavTab :active="2"></NavTab>
       <div class="header">搜索页面</div>
       <div class="search-wrap">
         <el-input

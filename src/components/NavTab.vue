@@ -17,9 +17,9 @@
   import {js} from '../assets/font.js';
 export default {
   name: 'NavTab',
+  props: ['active'],
   data () {
     return {
-      active: 0,
       tabs:[
       	{
       		name:'首页',

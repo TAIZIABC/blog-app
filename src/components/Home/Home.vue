@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <Head></Head>
-    <NavTab></NavTab>
+    <NavTab :active="0"></NavTab>
     <div class="slide-wrap">
       <Slide></Slide>
     </div>

@@ -1,6 +1,6 @@
 <template>
   <div class="personal">
-    <NavTab></NavTab>
+    <NavTab :active="3"></NavTab>
     <div class="head">
       <div>
         <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1530626000&di=95c0c71b654d2833b986db6f987c785e&imgtype=jpg&er=1&src=http%3A%2F%2Fimg.mp.itc.cn%2Fupload%2F20170326%2F11cf01610f464ee6aaf529755fbbfff7_th.jpeg" alt="">
@@ -8,18 +8,31 @@
       </div>
     </div>
     <ul class="list">
-      <li class="list-item">我的作品
-        <span class="right-tag el-icon-arrow-right"></span>
-      </li>
-      <li class="list-item">我的收藏
-        <span class="right-tag el-icon-arrow-right"></span>
-      </li>
-      <li class="list-item">我的消息
-        <span class="right-tag el-icon-arrow-right"></span>
-      </li>
-      <li class="list-item">个人信息
-        <span class="right-tag el-icon-arrow-right"></span>
-      </li>
+      <router-link :to="{path:'/myworks'}">
+        <li class="list-item">我的作品
+          <span class="right-tag el-icon-arrow-right"></span>
+        </li>
+      </router-link>
+      <router-link :to="{path:'/mycollection'}">
+        <li class="list-item">我的收藏
+          <span class="right-tag el-icon-arrow-right"></span>
+        </li>
+      </router-link>
+      <router-link :to="{path:'/follow'}">
+        <li class="list-item">我的关注
+          <span class="right-tag el-icon-arrow-right"></span>
+        </li>
+      </router-link>
+      <router-link :to="{path:'/mynews'}">
+        <li class="list-item">我的消息
+          <span class="right-tag el-icon-arrow-right"></span>
+        </li>
+      </router-link>
+      <router-link :to="{path:'/userinfo'}">
+        <li class="list-item">个人信息
+          <span class="right-tag el-icon-arrow-right"></span>
+        </li>
+      </router-link>
     </ul>
   </div>
 </template>
