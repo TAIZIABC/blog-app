@@ -1,5 +1,5 @@
 <template>
-    <div class="header">
+    <div class="heads">
       <div class="el-icon-arrow-left back" @click="back"></div>
       <span class="title">{{title}}</span>
     </div>
@@ -7,7 +7,7 @@
 
 <script>
     export default {
-      name: "header",
+      name: "heads",
       props:[
         'title'
       ],
@@ -20,7 +20,7 @@
 </script>
 
 <style scoped>
-  .header{
+  .heads{
     width: 100%;
     height: 40px;
     position: fixed;

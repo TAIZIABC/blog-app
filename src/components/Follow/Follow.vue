@@ -1,7 +1,7 @@
 <template>
     <div class="follow">
       <div class="head-wrap">
-        <Head title="我的关注"></Head>
+        <Heads title="我的关注"></Heads>
       </div>
       <div class="follow-body">
         <templlate>
@@ -22,7 +22,7 @@
 </template>
 
 <script>
-  import Head from '@/components/head'
+  import Heads from '@/components/Heads'
   export default {
     name: "Follow",
     data(){
@@ -61,7 +61,7 @@
       }
     },
     components:{
-        Head
+        Heads
     }
   }
 </script>

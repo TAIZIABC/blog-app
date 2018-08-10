@@ -1,7 +1,7 @@
 <template>
     <div class="detail">
       <div class="head-wrap">
-        <Head></Head>
+        <Heads></Heads>
       </div>
       <div class="title">
         <h2>{{ article.title }}</h2>
@@ -87,7 +87,7 @@
 </template>
 
 <script>
-  import Head from '@/components/head'
+  import Heads from '@/components/Heads'
   export default {
     name: "Detail",
     data(){
@@ -192,7 +192,7 @@
       }
     },
     components:{
-      Head
+      Heads
     }
 
   }

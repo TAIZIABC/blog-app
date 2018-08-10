@@ -1,7 +1,7 @@
 <template>
   <div class="content">
     <ul>
-      <a class="item" v-for="item in article" :href="item.url">
+      <router-link class="item" v-for="(item,index) in article" :key="index" :to="{path:item.url}">
         <div class="content-left">
           <div class="content-mid">
             <h2>{{ item.title }}</h2>
@@ -24,7 +24,7 @@
         <div class="content-right">
           <img :src="item.imgSrc" alt="">
         </div>
-      </a>
+      </router-link>
     </ul>
   </div>
 </template>

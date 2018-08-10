@@ -1,7 +1,7 @@
 <template>
     <div class="my-news">
       <div class="head-wrap">
-        <Head title="我的消息"></Head>
+        <Heads title="我的消息"></Heads>
       </div>
       <div class="list">
         <div class="list-item">
@@ -12,11 +12,11 @@
 </template>
 
 <script>
-  import Head from '@/components/head'
+  import Heads from '@/components/Heads'
     export default {
       name: "MyNews",
       components:{
-        Head
+        Heads
       }
     }
 </script>

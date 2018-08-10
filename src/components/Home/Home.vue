@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <Head></Head>
+    <!--<Heads></Heads>-->
     <NavTab :active="0"></NavTab>
     <div class="slide-wrap">
       <Slide></Slide>
@@ -15,8 +15,8 @@
 <script>
   import Slide from './slide';
   import {js} from '../../assets/font.js';
-  import List from '../list'
-  import Head from '../head'
+  import List from '../List'
+  import Heads from '../Heads'
   import NavTab from '@/components/NavTab'
     export default {
       name: "Home",
@@ -50,12 +50,21 @@
           ]
         }
       },
-        components:{
-          Slide,
-          List,
-          Head,
-          NavTab
-        }
+      components:{
+        Slide,
+        List,
+        Heads,
+        NavTab
+      },
+      created(){
+        // this.$ajax.get('http://jsonplaceholder.typicode.com/posts')
+        //   .then((res)=>{
+        //     console.log(res);
+        //   })
+        //   .catch((err)=>{
+        //     console.log(err);
+        //   })
+      }
     }
 </script>
 

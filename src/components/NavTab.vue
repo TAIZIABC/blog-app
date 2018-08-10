@@ -1,8 +1,8 @@
 <template>
   <div class="nav-tab">
     <ul>
-        <li v-for="(item,index) in tabs"  @click="change(index)">
-          <router-link :to="{path:item.tag}" :class="{active:active===index}">
+        <li v-for="(item,index) in tabs" >
+          <router-link :to="{path:item.tag}" :class="{actives:active===index}">
             <svg class="icon" aria-hidden="true">
               <use :href="item.icon"></use>
             </svg>
@@ -45,16 +45,16 @@ export default {
     }
   },
   methods: {
-    change: function (index) {
-      this.active = index;
-    }
+    // change: function (index) {
+    //   this.active = index;
+    // }
   }
 }
 </script>
 
 
 <style scoped lang="stylus">
-  .active
+  .actives
     color blue
   .nav-tab
     width: 100%;

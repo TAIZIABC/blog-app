@@ -2,9 +2,13 @@
   <div class="personal">
     <NavTab :active="3"></NavTab>
     <div class="head">
-      <div>
-        <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1530626000&di=95c0c71b654d2833b986db6f987c785e&imgtype=jpg&er=1&src=http%3A%2F%2Fimg.mp.itc.cn%2Fupload%2F20170326%2F11cf01610f464ee6aaf529755fbbfff7_th.jpeg" alt="">
-        <div class="name"><router-link :to="{path:'/login'}">taizi</router-link></div>
+      <div v-show="!isLogin" class="login-wrap">
+        <router-link :to="{path:'/login'}">请登录</router-link>
+      </div>
+      <div v-show="isLogin">
+        <!--<img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1530626000&di=95c0c71b654d2833b986db6f987c785e&imgtype=jpg&er=1&src=http%3A%2F%2Fimg.mp.itc.cn%2Fupload%2F20170326%2F11cf01610f464ee6aaf529755fbbfff7_th.jpeg" alt="">-->
+        <img :src="userMsg.headimgSrc" alt="">
+        <div class="name">{{userMsg.userName}}</div>
       </div>
     </div>
     <ul class="list">
@@ -33,6 +37,9 @@
           <span class="right-tag el-icon-arrow-right"></span>
         </li>
       </router-link>
+      <li class="list-item" v-show="isLogin" @click="logout">退出账号
+        <span class="right-tag el-icon-arrow-right"></span>
+      </li>
     </ul>
   </div>
 </template>
@@ -40,9 +47,27 @@
 <script>
   import NavTab from '@/components/NavTab'
     export default {
-        name: "Personal",
+      name: "Personal",
+      data(){
+        return{
+          userMsg: {}
+        }
+      },
       components:{
           NavTab
+      },
+      computed: {
+        isLogin(){
+          return this.$store.state.isLogin;
+        }
+      },
+      methods: {
+        logout(){
+          this.$store.state.isLogin = false;
+        }
+      },
+      created(){
+        this.userMsg = this.$store.state.userMsg;
       }
     }
 </script>
@@ -58,6 +83,14 @@
     background-color: green;
     justify-content: center;
     align-items: center;
+  }
+  .login-wrap{
+    width: 60px;
+    height: 60px;
+    text-align: center;
+    line-height: 60px;
+    border-radius: 50%;
+    background-color: rgba(99, 212, 245, 0.8);
   }
   .head img{
     width: 60px;
