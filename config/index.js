@@ -16,7 +16,8 @@ module.exports = {
         pathRewrite:{
           '^/api':'/'
         }
-      }
+      },
+      '/upload': 'http://localhost:4000/upload'
     },
 
     // Various Dev Server settings

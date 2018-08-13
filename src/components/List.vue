@@ -1,28 +1,28 @@
 <template>
   <div class="content">
     <ul>
-      <router-link class="item" v-for="(item,index) in article" :key="index" :to="{path:item.url}">
+      <router-link class="item" v-for="(item,index) in article" :key="index" :to="{path:'/detail',query:{id:item._id}}">
         <div class="content-left">
           <div class="content-mid">
-            <h2>{{ item.title }}</h2>
-            <p>{{ item.content }}</p>
+            <h2 v-color>{{ item.title }}</h2>
+            <p>{{ item.content|shortContent }}</p>
           </div>
           <div class="content-footer">
-            <span class="author">taizi</span>&nbsp;
+            <span class="author">{{item.author}}</span>&nbsp;
             <span class="like-num">
                   <svg class="icon" aria-hidden="true">
                     <use xlink:href="#icon-zan"></use>
-                  </svg>22
+                  </svg>{{item.zan}}
             </span>&nbsp;
             <span class="comment">
                   <svg class="icon" aria-hidden="true">
                     <use xlink:href="#icon-pinglun"></use>
-                  </svg>24
+                  </svg>{{item.comment}}
             </span>
           </div>
         </div>
         <div class="content-right">
-          <img :src="item.imgSrc" alt="">
+          <img :src="item.worksSrc" alt="">
         </div>
       </router-link>
     </ul>
@@ -34,7 +34,19 @@
       name: "list",
       props:[
         'article'
-      ]
+      ],
+      directives: {
+        'color': {
+          bind(el,binding,vnode){
+            el.style.color = '#'+Math.random().toString(16).slice(2,8);
+          }
+        }
+      },
+      filters:{
+        shortContent(val){
+          return val.slice(0,35)+'...';
+        }
+      }
     }
 </script>
 

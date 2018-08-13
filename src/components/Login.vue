@@ -7,8 +7,8 @@
       <div class="input-group">
         <div class="demo-input-suffix">
           <el-input
-            placeholder="手机号"
-            v-model="userMsg.phone">
+            placeholder="用户名"
+            v-model="userMsg.username">
           </el-input>
         </div>
       </div>
@@ -39,7 +39,7 @@
       data(){
         return{
           userMsg:{
-            phone: '',
+            username: '',
             password: ''
           },
           msginfo: '',
@@ -54,27 +54,24 @@
               .then((response)=>{
                 this.loading = false;
                 this.msginfo = response.data.msg;
-                this.$store.commit('changeLogin');
-                this.$store.state.userMsg = response.data.userMsg;
-                this.$router.push({path: '/personal'});
-                console.log(response.data);
+                if(response.data.status){
+                  this.$store.commit('changeLogin');
+                  this.$store.state.userMsg = response.data.userMsg;
+                  this.$router.push({path: '/personal'});
+                }
               })
-              .catch((err)=>{
-                console.log(err);
+              .catch(()=>{
+                this.$message.error({message: '登录失败！',duration: 1000});
               })
           }
         },
         checked(){
-          if(this.userMsg.phone.trim().length<1){
+          if(this.userMsg.username.trim().length<1){
             this.msginfo = '手机号不能为空！';
             return false;
           }
           if(this.userMsg.password.trim().length<1){
             this.msginfo = '密码不能为空！';
-            // this.$message({
-            //   type: 'info',
-            //   message: '密码不能为空！'
-            // });
             return false;
           }
           return true;

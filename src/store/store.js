@@ -6,7 +6,8 @@ Vue.use(Vuex);
 const state = {
   count: 1,
   isLogin: false,
-  userMsg: ''
+  userMsg: '',
+  articles: []
 };
 
 const getters = {

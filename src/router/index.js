@@ -13,9 +13,9 @@ import MyCollection from '@/components/MyCollection/MyCollection'
 import MyNews from '@/components/MyNews/MyNews'
 import UserInfo from '@/components/UserInfo/UserInfo'
 import Follow from '@/components/Follow/Follow'
+import Avatar from '@/components/Avatar'
 
 Vue.use(Router);
-
 export default new Router({
   routes: [
     {
@@ -26,12 +26,18 @@ export default new Router({
     {
       path: '/home',
       name: 'Home',
+      meta: {
+        keepAlive: true
+      },
       component: Home
       // component: resolve => require(['@/components/Home/Home'],resolve)
     },
     {
       path:'/search',
       name:'Search',
+      meta: {
+        keepAlive: true
+      },
       component:Search
       // component: resolve => require(['@/components/Search/Search'],resolve)
     },
@@ -73,7 +79,9 @@ export default new Router({
     {
       path:'/myworks',
       name:'MyWorks',
-      meta:{auth:true},
+      meta:{
+        auth:true
+      },
       component:MyWorks
       // component: resolve => require(['@/components/MyWorks/MyWorks'],resolve)
     },
@@ -103,6 +111,13 @@ export default new Router({
       name:'UserInfo',
       meta:{auth:true},
       component:UserInfo
+      // component: resolve => require(['@/components/UserInfo/UserInfo'],resolve)
+    },
+    {
+      path:'/avatar',
+      name:'Avatar',
+      meta:{auth:true},
+      component:Avatar
       // component: resolve => require(['@/components/UserInfo/UserInfo'],resolve)
     }
   ]

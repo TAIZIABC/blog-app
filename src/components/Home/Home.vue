@@ -57,13 +57,16 @@
         NavTab
       },
       created(){
-        // this.$ajax.get('http://jsonplaceholder.typicode.com/posts')
-        //   .then((res)=>{
-        //     console.log(res);
-        //   })
-        //   .catch((err)=>{
-        //     console.log(err);
-        //   })
+        this.$ajax.get('/article/home')
+          .then((response)=>{
+            if(response.status===200){
+              this.article = response.data.article;
+              this.$store.state.articles = response.data.article;
+            }
+          })
+          .catch(()=>{
+            this.$message.error('网络错误！');
+          })
       }
     }
 </script>

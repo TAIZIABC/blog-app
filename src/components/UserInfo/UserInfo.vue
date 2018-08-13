@@ -7,14 +7,16 @@
         常规设置
       </div>
       <div class="info-list" >
-        <div class="info-item">
-          <div class="info-item-left">
-            更换头像
+        <router-link to="/avatar">
+          <div class="info-item">
+            <div class="info-item-left">
+              更换头像
+            </div>
+            <div class="info-item-right">
+              <img :src="userMsg.headimgSrc" alt="" class="user-avatar">
+            </div>
           </div>
-          <div class="info-item-right">
-            <img :src="userMsg.headimgSrc" alt="" class="user-avatar">
-          </div>
-        </div>
+        </router-link>
         <div class="info-item" @click="openBox(userMsg.userName,'userName')">
           <div class="info-item-left">
             更改昵称
@@ -98,7 +100,6 @@
       },
       created(){
         this.userMsg = this.$store.state.userMsg;
-        console.log(this.$store.state.userMsg);
       },
       components:{
         Heads
@@ -129,6 +130,7 @@
         .info-item-left{
           float: left
           line-height: 44px
+          color: #000
         }
         .info-item-right{
           float: right

@@ -4,18 +4,18 @@
         <Heads title="我的关注"></Heads>
       </div>
       <div class="follow-body">
-        <templlate>
+        <div>
           <li class="list-item" v-for="(user,index) in users">
             <div class="avatar-wrap">
-              <img class="user-avatar" :src="user.userAvatar" >
+              <img class="user-avatar" :src="user.headimgSrc" >
             </div>
             <div class="user-desc">
               <div class="user-name">{{user.userName}}</div>
-              <div class="user-motto">{{user.userMotto}}</div>
+              <div class="user-motto">{{user.gxqm}}</div>
             </div>
             <button class="follow-btn" v-text="user.status?'已关注':'+关注'" @click="followFunc(index)"></button>
           </li>
-        </templlate>
+        </div>
       </div>
       <div class="footer" v-text="users.length?'--end--':'暂无内容'"></div>
     </div>
@@ -27,38 +27,33 @@
     name: "Follow",
     data(){
       return{
-        users:[
-          {
-            userName: 'taizi',
-            userAvatar: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1530626000&di=95c0c71b654d2833b986db6f987c785e&imgtype=jpg&er=1&src=http%3A%2F%2Fimg.mp.itc.cn%2Fupload%2F20170326%2F11cf01610f464ee6aaf529755fbbfff7_th.jpeg',
-            userMotto: '走自己的路，让别人说去吧，天生我材必有用',
-            status: true
-          },
-          {
-            userName: 'admin',
-            userAvatar: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1530626000&di=95c0c71b654d2833b986db6f987c785e&imgtype=jpg&er=1&src=http%3A%2F%2Fimg.mp.itc.cn%2Fupload%2F20170326%2F11cf01610f464ee6aaf529755fbbfff7_th.jpeg',
-            userMotto: '走自己的路，让别人说去吧，天生我材必有用',
-            status: true
-          },
-          {
-            userName: 'blue',
-            userAvatar: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1530626000&di=95c0c71b654d2833b986db6f987c785e&imgtype=jpg&er=1&src=http%3A%2F%2Fimg.mp.itc.cn%2Fupload%2F20170326%2F11cf01610f464ee6aaf529755fbbfff7_th.jpeg',
-            userMotto: '走自己的路，让别人说去吧，天生我材必有用',
-            status: true
-          },
-          {
-            userName: 'lanou',
-            userAvatar: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1530626000&di=95c0c71b654d2833b986db6f987c785e&imgtype=jpg&er=1&src=http%3A%2F%2Fimg.mp.itc.cn%2Fupload%2F20170326%2F11cf01610f464ee6aaf529755fbbfff7_th.jpeg',
-            userMotto: '走自己的路，让别人说去吧，天生我材必有用',
-            status: true
-          }
-        ]
+        users:[]
       }
     },
     methods: {
       followFunc(index){
         this.users[index].status = !this.users[index].status;
+        let action =  this.users[index].status;
+        let uid = this.$store.state.userMsg._id;
+        let authorId = this.users[index]._id;
+        this.$ajax.post('/admin/follow',{action,uid,authorId})
+          .then((doc)=>{
+            console.log(doc.data);
+          })
       }
+    },
+    created(){
+      this.$ajax.post('/admin/myfollow',{id: this.$store.state.userMsg._id})
+        .then((response)=>{
+          console.log(response.data);
+          let doc = response.data.doc;
+          if(doc){
+            doc.map((item)=>{
+              return item.status = true;
+            });
+            this.users = doc;
+          }
+        })
     },
     components:{
         Heads

@@ -6,7 +6,8 @@ let userSchema = new mongoose.Schema({
 	"userPhone": Number,
 	// "sex": String,
 	"headimgSrc": String,
-	"gxqm": String
+	"gxqm": String,
+  'follow': []
 });
 
 module.exports = mongoose.model("User",userSchema);

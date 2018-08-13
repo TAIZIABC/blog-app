@@ -14,7 +14,6 @@ router.use('/register',function (req,res) {
   // 判断是否存在的变量
   let existed = false;
   let userMsg = req.body;
-  console.log(userMsg);
   User.find({'usernNme': userMsg.username})
     .then((data)=>{
       if(data){
@@ -31,7 +30,8 @@ router.use('/register',function (req,res) {
       "userPhone": userMsg.phone,
       // "sex": '男',
       "headimgSrc": '/static/img/avatar.jpg',
-      "gxqm": '无'
+      "gxqm": '无',
+      'follow': []
     });
     user.save(function (err) {
       if(err){
@@ -49,8 +49,7 @@ router.use('/register',function (req,res) {
 
 // 登入接口
 router.use('/login',function (req,res) {
-  console.log(req.body);
-  User.findOne({'userPhone': req.body.phone,'userPwd': req.body.password})
+  User.findOne({'userName': req.body.username,'userPwd': req.body.password})
     .then((doc)=>{
       if(doc){
         responseData.status = SUCCESS;

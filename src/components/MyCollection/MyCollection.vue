@@ -18,6 +18,14 @@
           article:[]
         }
       },
+      created(){
+        this.$ajax.post('/article/mycollection',{'id': this.$store.state.userMsg._id})
+          .then((response)=>{
+            this.article = response.data.doc;
+          }).catch(()=>{
+          this.$message.error({message: '网络错误！',duration: 1000});
+        })
+      },
       components:{
         Heads,
         List
