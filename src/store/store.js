@@ -4,9 +4,8 @@ import Vuex from 'vuex';
 Vue.use(Vuex);
 
 const state = {
-  count: 1,
   isLogin: false,
-  userMsg: '',
+  userMsg: {},
   articles: []
 };
 
@@ -17,8 +16,10 @@ const mutations = {
   changeLogin(state){
     state.isLogin = true;
   },
-  add(state){
-    state.count++;
+  setInfo(state,msg){
+    state.userMsg = msg;
+    let userInfo =  JSON.stringify(msg);
+    localStorage.setItem('userInfo',userInfo);
   }
 };
 

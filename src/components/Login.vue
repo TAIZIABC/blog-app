@@ -55,13 +55,15 @@
                 this.loading = false;
                 this.msginfo = response.data.msg;
                 if(response.data.status){
+                  console.log(response.data.userMsg);
                   this.$store.commit('changeLogin');
-                  this.$store.state.userMsg = response.data.userMsg;
+                  this.$store.commit('setInfo',response.data.userMsg);
+                  // this.$store.state.userMsg = response.data.userMsg;
                   this.$router.push({path: '/personal'});
                 }
               })
               .catch(()=>{
-                this.$message.error({message: '登录失败！',duration: 1000});
+                this.$message.error({message: '登录失败,请稍后重试！',duration: 1000});
               })
           }
         },

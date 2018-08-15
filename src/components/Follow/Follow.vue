@@ -37,15 +37,12 @@
         let uid = this.$store.state.userMsg._id;
         let authorId = this.users[index]._id;
         this.$ajax.post('/admin/follow',{action,uid,authorId})
-          .then((doc)=>{
-            console.log(doc.data);
-          })
+          .then((doc)=>{})
       }
     },
     created(){
       this.$ajax.post('/admin/myfollow',{id: this.$store.state.userMsg._id})
         .then((response)=>{
-          console.log(response.data);
           let doc = response.data.doc;
           if(doc){
             doc.map((item)=>{

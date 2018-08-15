@@ -7,6 +7,7 @@ import Axios from 'axios'
 import store from './store/store'
 import apiConfig from '../config/api.config'
 import ElementUI from 'element-ui'
+import './util/touch'
 import 'element-ui/lib/theme-chalk/index.css'
 
 Vue.prototype.$ajax = Axios;
@@ -22,17 +23,25 @@ router.beforeEach((to,form,next)=>{
       next();
     }else{
       // query:{ Rurl: to.fullPath}表示把当前路由信息传递过去方便登录后跳转回来；
-      next({path: '/login',query:{Rule: to.fullPath}})
+      next({path: '/login',query:{rule: to.fullPath}})
     }
   }else{
     next();
   }
 });
+
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
   router,
   store,
   components: { App },
-  template: '<App/>'
+  template: '<App/>',
+  created(){
+    if(localStorage.getItem('userInfo')){
+      this.$store.state.userMsg = JSON.parse(localStorage.getItem('userInfo'));
+      this.$store.state.isLogin = true;
+    }
+  }
+
 });

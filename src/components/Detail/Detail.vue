@@ -106,16 +106,16 @@
         // 评论内容
         ratingVal: '',
         article: {
-          title: '终于等到你：简书代码块高亮',
-          authorName: 'taizi',
-          userHeadImg: 'https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=941310360,2054712345&fm=27&gp=0.jpg',
-          time: '2018-05-28 16:50',
-          imgSrc: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1530377300123&di=ddfe6fb3231ebd1771e87c5c93a7179b&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2Fb7003af33a87e95053e42ae21c385343faf2b449.jpg',
-          content: '就在上周，我们的产品小哥哥告诉大婶，咋们偷偷上线了一个新功能:那就是技术类作者期待了很久的代码块高亮。',
-          comment: 5,
-          collection: 2,
-          zan: 14,
-          cai: 6
+          // title: '终于等到你：简书代码块高亮',
+          // authorName: 'taizi',
+          // userHeadImg: 'https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=941310360,2054712345&fm=27&gp=0.jpg',
+          // time: '2018-05-28 16:50',
+          // imgSrc: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1530377300123&di=ddfe6fb3231ebd1771e87c5c93a7179b&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2Fb7003af33a87e95053e42ae21c385343faf2b449.jpg',
+          // content: '就在上周，我们的产品小哥哥告诉大婶，咋们偷偷上线了一个新功能:那就是技术类作者期待了很久的代码块高亮。',
+          // comment: 5,
+          // collection: 2,
+          // zan: 14,
+          // cai: 6
         },
         ratings:[
           {

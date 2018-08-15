@@ -6,14 +6,13 @@
         <router-link :to="{path:'/login'}">请登录</router-link>
       </div>
       <div v-show="isLogin">
-        <!--<img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1530626000&di=95c0c71b654d2833b986db6f987c785e&imgtype=jpg&er=1&src=http%3A%2F%2Fimg.mp.itc.cn%2Fupload%2F20170326%2F11cf01610f464ee6aaf529755fbbfff7_th.jpeg" alt="">-->
-        <img :src="userMsg.headimgSrc" alt="">
+        <img :src="userMsg.headimgSrc" alt="网络错误，图片加载失败！">
         <div class="name">{{userMsg.userName}}</div>
       </div>
     </div>
     <ul class="list">
       <router-link :to="{path:'/myworks'}">
-        <li class="list-item">我的作品
+        <li class="list-item" >我的作品
           <span class="right-tag el-icon-arrow-right"></span>
         </li>
       </router-link>
@@ -27,11 +26,11 @@
           <span class="right-tag el-icon-arrow-right"></span>
         </li>
       </router-link>
-      <router-link :to="{path:'/mynews'}">
-        <li class="list-item">我的消息
-          <span class="right-tag el-icon-arrow-right"></span>
-        </li>
-      </router-link>
+      <!--<router-link :to="{path:'/mynews'}">-->
+        <!--<li class="list-item">我的消息-->
+          <!--<span class="right-tag el-icon-arrow-right"></span>-->
+        <!--</li>-->
+      <!--</router-link>-->
       <router-link :to="{path:'/userinfo'}">
         <li class="list-item">个人信息
           <span class="right-tag el-icon-arrow-right"></span>
@@ -64,6 +63,8 @@
       methods: {
         logout(){
           this.$store.state.isLogin = false;
+          this.$store.state.userMsg = {};
+          localStorage.setItem('userInfo', '');
         }
       },
       created(){

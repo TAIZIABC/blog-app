@@ -45,7 +45,6 @@ router.use('/publish',function (req,res) {
       })
     }
   });
-
 });
 
 
@@ -91,9 +90,7 @@ router.use('/follow',function (req,res) {
       res.json({satatus: SUCCESS,msg: 'success'});
     });
   }
-
 });
-
 
 // 我的关注接口
 router.use('/myfollow',function (req,res) {
@@ -111,9 +108,19 @@ router.use('/myfollow',function (req,res) {
 
 });
 
+
 // 修改用户信息接口
 router.use('/info',function (req,res) {
   let id = req.body.id;
+  // 用户名不能重复，需单独处理
+  if(req.body.type==='userName'){
+    User.find({'userName': req.body.value}).then(doc=>{
+      if(doc.length){
+        res.json({status: ERROR,msg: '用户名已存在！'});
+        return false;
+      }
+    })
+  }
   let obj = {};
   obj[req.body.type] = req.body.value;
   User.update({'_id': id},obj)

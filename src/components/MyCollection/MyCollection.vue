@@ -3,7 +3,7 @@
       <div class="head-wrap">
         <Heads title="我的收藏"></Heads>
       </div>
-      <List :article="article"></List>
+      <List :article="article" tag="mycollection"></List>
       <div class="footer" v-text="article.length?'--end--':'暂无内容'"></div>
     </div>
 </template>

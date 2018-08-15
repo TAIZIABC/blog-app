@@ -1,7 +1,12 @@
 <template>
   <div class="content">
     <ul>
-      <router-link class="item" v-for="(item,index) in article" :key="index" :to="{path:'/detail',query:{id:item._id}}">
+      <router-link class="item"
+                   v-for="(item,index) in article"
+                   :key="index"
+                   :to="{path:'/detail',query:{id:item._id}}"
+                    v-longtap="tag==='myworks'?{fn:delWorks,id:item._id,index}:{fn:unFollow,id:item._id,index}"
+                    >
         <div class="content-left">
           <div class="content-mid">
             <h2 v-color>{{ item.title }}</h2>
@@ -12,7 +17,7 @@
             <span class="like-num">
                   <svg class="icon" aria-hidden="true">
                     <use xlink:href="#icon-zan"></use>
-                  </svg>{{item.zan}}
+                  </svg>{{item.likeUserId.length}}
             </span>&nbsp;
             <span class="comment">
                   <svg class="icon" aria-hidden="true">
@@ -22,7 +27,7 @@
           </div>
         </div>
         <div class="content-right">
-          <img :src="item.worksSrc" alt="">
+          <img :src="item.worksSrc" alt="网络错误，图片加载失败！">
         </div>
       </router-link>
     </ul>
@@ -30,11 +35,59 @@
 </template>
 
 <script>
+  import { MessageBox } from 'element-ui'
     export default {
       name: "list",
       props:[
-        'article'
+        'article',
+        'tag'
       ],
+      methods: {
+        // 删除作品方法
+        delWorks(obj){
+            MessageBox.confirm('此操作将永久删除该文件, 是否继续?', '删除文章', {
+              confirmButtonText: '确定',
+              cancelButtonText: '取消',
+              type: 'warning',
+              center: true,
+            }).then(()=>{
+              // 客户端删除
+              this.article.splice(obj.index,1);
+              // 服务端删除
+              this.$ajax.post('/article/delwork',{'id': obj.id}).then((response)=>{
+                if(response.data.status){
+                  this.$message.success({message: '删除成功！',duration: 1000});
+                }
+              })
+            }).catch(()=>{
+              this.$message.error({message: '删除失败！',duration: 1000});
+            })
+        },
+        // 取消收藏方法
+        unFollow(obj){
+          if(this.tag!=='mycollection'){
+            return ;
+          }
+          MessageBox.confirm('取消收藏, 是否继续?', '取消收藏', {
+            confirmButtonText: '确定',
+            cancelButtonText: '取消',
+            type: 'warning',
+            center: true,
+          }).then(()=>{
+            // 客户端修改
+            this.article.splice(obj.index,1);
+            // 服务端修改
+            this.$ajax.post('/article/soucan',{'action': false,'aid': obj.id,'uid': this.$store.state.userMsg._id}).then((response)=>{
+              // action为false时是表示取消收藏的标记
+              if(response.data.status){
+                this.$message.success({message: '删除成功！',duration: 1000});
+              }
+            })
+          }).catch(()=>{
+            this.$message.error({message: '取消失败！',duration: 1000});
+          })
+        }
+      },
       directives: {
         'color': {
           bind(el,binding,vnode){

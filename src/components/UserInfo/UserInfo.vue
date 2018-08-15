@@ -79,23 +79,18 @@
             // 服务端修改
             this.$ajax.post('/admin/info',{type,value:val.value,id: this.userMsg._id})
               .then((response)=>{
-                console.log(response.data);
                 if(response.data.status){
                   // 客服端修改
                   this.$store.state.userMsg[type] = val.value;
                   this.userMsg[type] = val.value;
-                  this.$message({type: 'success',message: '修改成功!'});
+                  this.$message({type: 'success',message: response.data.msg});
                 }else{
-                  this.$message({type: 'success',message: '修改失败!'});
-                  return;
+                  this.$message({type: 'error',message: response.data.msg});
                 }
               });
           }).catch(() => {
             this.$message({type: 'info',message: '已取消修改'});
           });
-        },
-        del(){
-          alert(222);
         }
       },
       created(){
